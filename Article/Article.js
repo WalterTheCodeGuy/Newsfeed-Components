@@ -85,7 +85,26 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+		title: "There's always money in the Banana Stand",
+		date: "Sep 4th, 2019",
+		firstParagraph: `You burn down the storage unit? Oh, most definitely. In prison, you just have to close your eyes and take it, but here you have to close your eyes and give it. If that man's straight, then I am sober. I'm not a prostitute. Michael: Then I shall let you live! Obviously this blue part here is the land. Saw this on the highway and almost blue myself. Hop on? Mr. Zuckerkorn, you've been warned about touching. You said spanking.`,
+
+		secondParagraph: `Taste the happy, Michael! Taste it! Everyone's laughing, and riding, and cornholing except Buster. This is the best free scrapbooking class I've ever taken! I figured out a way to make money while I'm working! It's one banana Michael, what could it cost, ten dollars? Get rid of the Seaward. Lucille: I'll leave when I'm good and ready.`,
+
+		thirdParagraph: `Hey, look at that – you're mean sober, too. Turn this skiff around! A sea of waiters and no one will take a drink order. They frame my junk. In prison, you just have to close your eyes and take it, but here you have to close your eyes and give it. So you take your mom to work every day? Bummer. Moms are such a pain in the ass, huh? It's, like, die already! So did you see the new Poof? His name's Gary, and we don't need anymore lawsuits.`
+	},
+	{
+		title:
+			"The Greatest News Article In The History Of Our Country, Believe Me!",
+		date: "Sep 4th, 2019",
+		firstParagraph: `i am so proud of our great country. god bless america! because of #fakenews my people are not getting the credit they deserve for doing a great job. as seen here they are all doing a great job! iran just test-fired a ballistic missile capable of reaching israel.they are also working with north korea.not much of an agreement we have! thank you to doug parker and american airlines for all of the help you have given to the u.s. with hurricane flights. fantastic job! big meetings today at the united nations. so many interesting leaders. america first will make america great again! we were let down by all of the democrats and a few republicans. most republicans were loyal terrific & worked really hard. we will return! democrats slam gop healthcare proposal as obamacare premiums & deductibles increase by over 100%.`,
+
+		secondParagraph: `i think senator blumenthal should take a nice long vacation in vietnam where he lied about his service so he can at least say he was there sanctions were not discussed at my meeting with president putin. nothing will be done until the ukrainian & syrian problems are solved! ...case against him & now wants to clear his name by showing "the false or misleading testimony by james comey john brennan..." witch hunt! obamacare is in serious trouble. the dems need big money to keep it going - otherwise it dies far sooner than anyone would have thought.`,
+
+		thirdParagraph: `8 dems control the senate! wow senator luther strange picked up a lot of additional support since my endorsement. now in september runoff. strong on wall & crime! congratulation to roy moore and luther strange for being the final two and heading into a september runoff in alabama. exciting race! good news out of the house with the passing of 'no sanctuary for criminals act.' hopefully senate will follow. make america great again! #riyadhsummit #potusabroad?? the fake news media is officially out of control. they will do or say anything in order to get attention - never been a time like this! watch @foxandfriends now on podesta and russia!.`
+	}
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -112,3 +131,62 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector('.articles');
+
+data.forEach(item => {
+  articles.appendChild(
+    createArticle (
+      item.title,
+      item.date,
+      item.firstParagraph,
+      item.secondParagraph,
+      item.thirdParagraph,
+    )
+  );
+});
+
+function createArticle (
+  title,
+  date,
+  firstParagraph,
+  secondParagraph,
+  thirdParagraph,
+) {
+  // define elements
+  const article = document.createElement('div');
+  const headline = document.createElement('h2');
+  const day = document.createElement('p');
+  const content1 = document.createElement('p');
+  const content2 = document.createElement('p');
+  const content3 = document.createElement('p');
+  const button = document.createElement('span');
+
+  //structure
+  article.appendChild(headline);
+  article.appendChild(day);
+  article.appendChild(content1);
+  article.appendChild(content2);
+  article.appendChild(content3);
+  article.appendChild(button);
+
+  //class names
+  article.classList.add('article');
+  day.classList.add('date');
+  button.classList.add('expandButton');
+
+  //text content
+  headline.textContent = title;
+  day.textContent = date;
+  content1.textContent = firstParagraph;
+  content2.textContent = secondParagraph;
+  content3.textContent = thirdParagraph;
+  button.textContent = 'Expand';
+
+  //event
+  button.addEventListener('click', e => {
+    console.log('button clicked', e.target);
+    article.classList.toggle('article-open');
+  });
+  return article;
+}
